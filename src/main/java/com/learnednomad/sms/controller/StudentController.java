@@ -51,7 +51,8 @@ public class StudentController {
 
     @PostMapping("/students/{id}")
     public String updateStudent(@PathVariable Long id,
-                                @ModelAttribute("student") Student student, Model model){
+                                @ModelAttribute("student") Student student,
+                                Model model){
 
         //get student from database by id
         Student existingStudent = studentService.getStudentById(id);
@@ -63,6 +64,12 @@ public class StudentController {
         //save the update
         studentService.updateStudent(student);
         return "redirect:/students";
+    }
 
+//handler method to delete student
+    @GetMapping("/students/{id}")
+    public String deleteStudent(@PathVariable Long id){
+        studentService.deleteStudentById(id);
+        return "redirect:/students";
     }
 }
